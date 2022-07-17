@@ -7,21 +7,17 @@ import { db } from "../../firebase"
 import { collection, getDocs, doc, onSnapshot} from "@firebase/firestore";
 import FlipMove from 'react-flip-move';
 
+
 function Feed() {
   const [posts, setPosts] = React.useState([])
-
-
   const colRef = collection(db, "posts")
   React.useEffect(() => {
       onSnapshot(colRef, (snapshot) => {
         const posts = snapshot.docs.map((doc) => ({...doc.data(), id: doc.id}))
         setPosts(posts)
-        console.log(posts)
       },(error) => {
         alert("Hi! I am unfortunately out of api calls to my backend server for today. Please try again tommorow. ")
-      })
-
-      
+      })      
   }, []);
 
   return (

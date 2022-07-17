@@ -4,6 +4,7 @@ import me from "../../assets/me.jpg";
 import "./TweetBox.css"
 import { db } from "../../firebase"
 import {collection, addDoc} from "firebase/firestore"
+import { serverTimestamp } from "firebase/firestore";
 
 const TweetBox = () => {
 
@@ -19,7 +20,8 @@ const TweetBox = () => {
             verified: true,
             text: tweetMessage,
             avatar: me,
-            image: tweetImage
+            image: tweetImage,
+            timestamp: serverTimestamp()
         }
 
         addDoc(collection(db, "posts"), post)
