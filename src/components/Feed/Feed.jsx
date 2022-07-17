@@ -4,20 +4,27 @@ import Post from "./Post";
 import TweetBox from "./TweetBox";
 import me from "../../assets/me.jpg";
 import { db } from "../../firebase"
-import { collection, getDocs } from "@firebase/firestore";
+import { collection, getDocs, doc, onSnapshot} from "@firebase/firestore";
 import FlipMove from 'react-flip-move';
 
 function Feed() {
   const [posts, setPosts] = React.useState([])
 
+
+  const colRef = collection(db, "posts")
   React.useEffect(() => {
-    async function fetchAPI() {
-      let { docs } = await getDocs(collection(db, "posts"))
-      let response = docs.map(doc => doc.data())
-      setPosts(response)
-    }
-    fetchAPI()
-  }, [posts]);
+    // async function fetchAPI() {
+      // let { docs } = await getDocs(collection(db, "posts"))
+      // let response = docs.map(doc => doc.data())
+      // setPosts(response)
+
+      onSnapshot(colRef, (snapshot) => {
+        const posts = snapshot.docs.map((doc) => ({...doc.data(), id: doc.id}))
+        setPosts(posts)
+        console.log(posts)
+        
+      })
+  }, []);
 
   return (
     <div className="feed">
@@ -28,7 +35,7 @@ function Feed() {
       <FlipMove>
       {posts.map(post =>
         <Post 
-          // key={}
+          key={post.id}
           displayName={post.displayName}
           username={post.username}
           verified={post.verified}
