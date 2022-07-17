@@ -3,14 +3,14 @@ import "./Feed.css";
 import Post from "./Post";
 import TweetBox from "./TweetBox";
 import me from "../../assets/me.jpg";
-import {db} from "../../firebase"
+import { db } from "../../firebase"
 import { collection, getDocs } from "@firebase/firestore";
 
 
-async function getPosts(){
-  const {docs} = await getDocs(collection(db, "posts"))
-  const docs_f = 
-  console.log(docs_f)
+async function getPosts() {
+  const { docs } = await getDocs(collection(db, "posts"))
+  const docs_f =
+    console.log(docs_f)
   return docs_f
 }
 
@@ -19,12 +19,12 @@ function Feed() {
 
   React.useEffect(() => {
     async function fetchAPI() {
-      let {docs} = await getDocs(collection(db, "posts"))
+      let { docs } = await getDocs(collection(db, "posts"))
       let response = docs.map(doc => doc.data())
       setPosts(response)
     }
     fetchAPI()
-  }, []);
+  }, [posts]);
 
   return (
     <div className="feed">
@@ -32,20 +32,15 @@ function Feed() {
         <h2> Home</h2>
       </div>
       <TweetBox />
-      {/* Post */}
-      {posts.map(post => 
-      <Post displayName= {post.displayName}
-       username= {post.username}
-       verified = {post.verified}
-       text= {post.text}
-       avatar={post.avatar}
-       image = {post.image}
-       />)}
-      
-      {/* Post */}
-      {/* Post */}
-      {/* Post */}
-      {/* Post */}
+      {posts.map(post =>
+        <Post 
+          displayName={post.displayName}
+          username={post.username}
+          verified={post.verified}
+          text={post.text}
+          avatar={post.avatar}
+          image={post.image}
+        />)}
     </div>
   );
 };
