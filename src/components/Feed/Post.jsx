@@ -18,24 +18,24 @@ const Post = ({ displayName,
     return (
         <div className="post">
             <div className="post__avatar">
-                <Avatar src={me} ></Avatar>
+                <Avatar src={avatar} ></Avatar>
             </div>
             <div className="post__body">
                 <div className="post__header">
                     <div className="post__headerText">
                         <h3>
-                            Tanmay Singh
+                            {displayName}
                             <span className="post__headerSpecial">
-                                <VerifiedIcon className="post__badge" /> @tstanmay13
+                                {verified && <VerifiedIcon className="post__badge" />} {username}
                             </span>
 
                         </h3>
                     </div>
                     <div className="post__headerDescription">
-                        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, voluptatibus aliquam. Doloribus aspernatur nam cumque blanditiis recusandae aliquid nihil temporibus!</p>
+                        <p> {text} </p>
                     </div>
                 </div>
-                <img src="https://images.unsplash.com/photo-1520453803296-c39eabe2dab4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGVsbG8lMjBzaWdufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="" />
+                <img src={image} alt="" />
                 <div className="post__footer">
                     <ChatBubbleOutlineIcon fontSize="small" />
                     <RepeatIcon fontSize="small" />
