@@ -5,14 +5,7 @@ import TweetBox from "./TweetBox";
 import me from "../../assets/me.jpg";
 import { db } from "../../firebase"
 import { collection, getDocs } from "@firebase/firestore";
-
-
-async function getPosts() {
-  const { docs } = await getDocs(collection(db, "posts"))
-  const docs_f =
-    console.log(docs_f)
-  return docs_f
-}
+import FlipMove from 'react-flip-move';
 
 function Feed() {
   const [posts, setPosts] = React.useState([])
@@ -32,8 +25,10 @@ function Feed() {
         <h2> Home</h2>
       </div>
       <TweetBox />
+      <FlipMove>
       {posts.map(post =>
         <Post 
+          // key={}
           displayName={post.displayName}
           username={post.username}
           verified={post.verified}
@@ -41,6 +36,7 @@ function Feed() {
           avatar={post.avatar}
           image={post.image}
         />)}
+        </FlipMove>
     </div>
   );
 };
