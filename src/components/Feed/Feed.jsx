@@ -13,17 +13,15 @@ function Feed() {
 
   const colRef = collection(db, "posts")
   React.useEffect(() => {
-    // async function fetchAPI() {
-      // let { docs } = await getDocs(collection(db, "posts"))
-      // let response = docs.map(doc => doc.data())
-      // setPosts(response)
-
       onSnapshot(colRef, (snapshot) => {
         const posts = snapshot.docs.map((doc) => ({...doc.data(), id: doc.id}))
         setPosts(posts)
         console.log(posts)
-        
+      },(error) => {
+        alert("Hi! I am unfortunately out of api calls to my backend server for today. Please try again tommorow. ")
       })
+
+      
   }, []);
 
   return (
