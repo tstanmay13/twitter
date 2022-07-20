@@ -4,7 +4,7 @@ import Post from "./Post";
 import TweetBox from "./TweetBox";
 import me from "../../assets/me.jpg";
 import { db } from "../../firebase"
-import { collection, getDocs, doc, onSnapshot} from "@firebase/firestore";
+import { collection, deleteDoc, doc, onSnapshot} from "@firebase/firestore";
 import FlipMove from 'react-flip-move';
 
 
@@ -20,6 +20,11 @@ function Feed() {
       })      
   }, []);
 
+
+  async function deletePost(){
+    await deleteDoc(doc(db,"posts", "XSBmiuex6z6d3E54Ar8p"))
+  }
+  deletePost()
   return (
     <div className="feed">
       <div className="feed__header">

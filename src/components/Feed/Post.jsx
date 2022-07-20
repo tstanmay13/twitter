@@ -14,7 +14,7 @@ const Post = forwardRef(({ displayName,
     text,
     image,
     avatar }, ref) => {
-
+        
     return (
         <div className="post" ref={ref}>
             <div className="post__avatar">
@@ -24,7 +24,7 @@ const Post = forwardRef(({ displayName,
                 <div className="post__header">
                     <div className="post__headerText">
                         <h3>
-                            {displayName}
+                            <span class="post__name">{displayName}</span>
                             <span className="post__headerSpecial">
                                 {verified && <VerifiedIcon className="post__badge" />} {username}
                             </span>
